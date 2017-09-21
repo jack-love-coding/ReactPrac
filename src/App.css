@@ -1,0 +1,88 @@
+html,
+body {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+}
+
+
+
+.App {
+  /*text-align: center;*/
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 30px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 30px;
+  padding: 20px;
+  color: white;
+  margin-bottom: 50px;
+}
+
+.Navigation-container,
+.Navigation-wrapper {
+  display: flex;
+  margin: auto;
+}
+
+.navigation-item {
+  padding: 0 50px;
+  font-size: 20px;
+  color: white;
+
+}
+
+.navigation-item a{
+  color:white;
+}
+
+
+.content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+.leftbar {
+  background-color: #f4f4f4;
+  border-left: 1px #ccc solid;
+  border-right: 1px #ccc solid;
+  width: 20%;
+  min-height: 800px;
+
+}
+
+.main-content {
+  width: 80%;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+#companyName {
+  margin: 0 10px;
+  margin: auto;
+  font-size: 20px;
+}
+
+label {
+  display: block;
+}
+
+input[]
+
+.form-wristband .row{
+  display: flex;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
