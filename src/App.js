@@ -83,64 +83,21 @@ class App extends Component {
     console.log('test');
     return (
       <div className="App">
-        <div className="App-header">
-        /*
-          <div className="Navigation-container">
-            <img src={logo} className="App-logo" alt="logo" />
-            <span id="companyName">Customer Wristband</span>
-            <nav>
-            <ul className="Navigation-wrapper">
-              <li className="navigation-item">
-              <a style={{cursor:'pointer'}}>Cars&Vehicles</a>
-              </li>
-              <li className="navigation-item">
-              <a href="javascript:void(0)">House & Garden</a>
-              </li>
-              <li className="navigation-item">
-              <a href="#">Jobs</a>
-              </li>
-              <li className="navigation-item">
-              <a href="#">Find out more!</a>
-              </li>
-            </ul>
-            </nav>
-          </div>
-          */
-        </div>
+
         <div className="content">
-        /*
-          <div className="leftbar">
-            This1
-            <div className="checkout-summary">
-              <h2>Order Summary</h2>
-              <div className="checkout-list"></div>
-              <div className="checkout-total"></div>
-            </div>
-          </div>*/
+
           <div className="main-content">
-            This2
             <div className="Order">
 
                 <div className="selectWristband">
-                  <h2>Choose a wristband</h2>
+                  <h2>Enter your details</h2>
                   <div className="form-wristband">
                     <div className="row">
                     {/*an atomic unit of wristband*/}
 
 
 
-                      <div className="wristband-wrapper col-sm-3">
-                        <div className="Wristband">
-                          <label htmlFor="wb1">
-                            <img src="img/icon-debossed.png" />
-                            <span>Debossed</span>
-                            <span>
-                              <small>Sillicone Wristbands</small>
-                            </span>
-                              {/*}<input type="radio" name="wb" id="wb1" value="Debossed Sillicone" />*/}
-                          </label>
-                        </div>
-                      </div>
+
 
 
 
