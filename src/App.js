@@ -27,11 +27,15 @@ class UserInfo extends Component {
 
   handleClick(){
     console.log('clicked');
-    const userInfo = this.state.userName;
+    const userName = this.state.userName;
+    const companyName = this.state.companyName;
+    const email = this.state.email;
+    const mobile = this.state.mobile;
+    const userInfo = {user:userName,company:companyName,email:email,mobile:mobile};
     console.log(userInfo);
-    $.ajax({url:'localhost:3001',
+    $.ajax({url:'http://localhost:3001',
        type:'POST',
-       data:JSON.stringify(userInfo),
+       data:userInfo,
        dataType:'json',
        success(response){
          console.log(response);
