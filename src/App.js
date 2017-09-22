@@ -32,18 +32,21 @@ class UserInfo extends Component {
     const email = this.state.email;
     const mobile = this.state.mobile;
     const userInfo = {user:userName,company:companyName,email:email,mobile:mobile};
+    var res = '';
     console.log(userInfo);
     $.ajax({url:'http://localhost:3001',
        type:'POST',
        data:userInfo,
        dataType:'json',
        success(response){
+         res = response;
          console.log(response);
        },
        error(jqXHR,status,errorThrown){
          console.log(jqXHR);
          console.log(status);
        }});
+    console.log(res);
   }
 
 
