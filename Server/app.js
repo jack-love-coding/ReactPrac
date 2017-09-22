@@ -4,6 +4,9 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var assert = require('assert');
+var mongo = require('mongodb').MongoClient;
+var db_url = 'mongodb://localhost:27017/test';
 
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -46,7 +49,24 @@ app.get('/hi',function(req,res){
 
 app.post('/',function(req,res){
 	console.log(req.body.mobile);
-  res.send('yeah');
+  var userInfo = {
+    name: req.body.user,
+    company: req.body.company,
+    email: req.body.email,
+    mobile: req.body.mobile
+  };
+
+  mongo.connect(db_url,function(err,db){
+    assert.equal(null,err);
+    db.collection('userInfo').insert(userInfo,function(err,result){
+      assert.equal(null,err);
+      console.log('data inserted');
+      db.close();
+      res.json(req.body.email);
+    });
+  });
+
+
 })
 
 // error handler

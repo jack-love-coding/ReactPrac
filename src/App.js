@@ -42,6 +42,7 @@ class UserInfo extends Component {
        },
        error(jqXHR,status,errorThrown){
          console.log(jqXHR);
+         console.log(status);
        }});
   }
 
