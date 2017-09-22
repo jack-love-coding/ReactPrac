@@ -84,6 +84,7 @@ class App extends Component {
     return (
       <div className="App">
         <div className="App-header">
+        /*
           <div className="Navigation-container">
             <img src={logo} className="App-logo" alt="logo" />
             <span id="companyName">Customer Wristband</span>
@@ -104,8 +105,10 @@ class App extends Component {
             </ul>
             </nav>
           </div>
+          */
         </div>
         <div className="content">
+        /*
           <div className="leftbar">
             This1
             <div className="checkout-summary">
@@ -113,7 +116,7 @@ class App extends Component {
               <div className="checkout-list"></div>
               <div className="checkout-total"></div>
             </div>
-          </div>
+          </div>*/
           <div className="main-content">
             This2
             <div className="Order">
