@@ -5,6 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var assert = require('assert');
+var mongodb = require('mongodb');
 var mongo = require('mongodb').MongoClient;
 var db_url = 'mongodb://localhost:27017/test';
 
@@ -37,7 +38,7 @@ app.use(function(req, res, next) {
   next(err);
 });
 */
-app.use(cors())
+app.use(cors());
 
 app.get('/',function(req,res){
   res.send("hello,world");
@@ -65,8 +66,30 @@ app.post('/',function(req,res){
       res.json(req.body.email);
     });
   });
+});
 
+app.get('/getRecord',function(req,res){
+  var record = [];
+  mongo.connect(db_url,function(err,db){
+    assert.equal(null,err);
+    db.collection('userInfo').find().toArray(function(err,docs){
+      if (err) throw err;
+      record = docs;
+      db.close();
+      res.json(record);
+    });
+  });
+});
 
+app.post('/deleteRecord',function(req,res){
+  var id = req.body.id;
+  mongo.connect(db_url,function(err,db){
+    assert.equal(null,err);
+    db.collection('userInfo').deleteOne({_id: new mongodb.ObjectID(id)});
+    if (err) throw err;
+    db.close();
+    res.json({});
+  })
 })
 
 // error handler

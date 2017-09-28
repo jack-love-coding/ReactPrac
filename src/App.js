@@ -14,6 +14,7 @@ class UserInfo extends Component {
       };
 
       this.handleInputChange = this.handleInputChange.bind(this);
+      this.handleClick = this.handleClick.bind(this)
   }
 
   handleInputChange(event){
@@ -47,11 +48,11 @@ class UserInfo extends Component {
          console.log(status);
        }});
     console.log(res);
+    this.props.onClick();
   }
 
 
   render(){
-    console.log(this.state.email);;
     return (
       <div>
       <form>
@@ -75,17 +76,114 @@ class UserInfo extends Component {
           </div>
         </div>
       </form>
-      <button onClick={this.handleClick.bind(this)}>Summit</button>
+      <button onClick={this.handleClick}>Summit</button>
       </div>
     );
   }
 }
 
+class DbPanel extends Component{
 
+  handleDelete(id){
+    var index = {
+      id : id
+    };
+
+
+
+    $.ajax({url:'http://localhost:3001/deleteRecord',
+       type:'POST',
+       data:index,
+       dataType:'json',
+       success(response){
+         console.log(response);
+       },
+       error(jqXHR,status,errorThrown){
+         console.log(jqXHR,status);
+       }});
+       this.props.onClick();
+  }
+
+  render(){
+    var countId = 0;
+    return (
+      <div>
+      <style>{`
+        table{
+          width:100%
+        }
+        table, th, td{
+          border:1px solid black;
+        }`
+        }
+      </style>
+        <h2>
+          MongoDB records monitoring
+        </h2>
+      <div className="DB-Panel" >
+        <table>
+          <tbody>
+           {
+            this.props.record.map((item)=>{
+
+              var handleChange = (event)=>{
+                var value = $.event.target.value;
+                var name = $.event.target.name;
+                item[name] = value;
+              };
+
+              return(
+              <tr key={countId++}>
+                <td><input name="name" type="text" className="form-control" value={item.name} onChange={handleChange} /></td>
+                <td><input name="company" type="text" className="form-control" value={item.company} onChange={handleChange} /></td>
+                <td><input name="mobile" type="text" className="form-control" value={item.mobile} onChange={handleChange} /></td>
+                <td><input name="email" type="text" className="form-control" value={item.email} onChange={handleChange()} /></td>
+                <td><button onClick={()=>{this.handleDelete(item._id)}}>Delete</button></td>
+              </tr>
+            )
+          })
+          }
+          </tbody>
+        </table>
+      </div>
+    </div>
+    )
+  }
+
+}
 
 class App extends Component {
 
+  constructor(props){
+    super(props);
+    this.state = {
+      db : []
+    };
+    this.handleRequestDB = this.handleRequestDB.bind(this);
+  };
 
+  componentDidUpdate(prevProps,prevState){
+    console.log('test!!!');
+    console.log(this.state.db);
+  }
+
+  handleRequestDB(){
+    var that = this;
+    $.ajax({url:'http://localhost:3001/getRecord',
+       type:'GET',
+       dataType:'json',
+       success(response){
+         const res = response;
+         that.setState({
+           db : res
+         });
+         console.log(that.state.db);
+       },
+       error(jqXHR,status,errorThrown){
+         console.log(jqXHR);
+         console.log(status);
+       }});
+  }
 
   render() {
     console.log('test');
@@ -99,22 +197,19 @@ class App extends Component {
 
                 <div className="selectWristband">
                   <h2>Enter your details</h2>
-                  <div className="form-wristband">
+                  <div className="form-wristband" style={{'marginBottom':'100 px'}} >
                     <div className="row">
                     {/*an atomic unit of wristband*/}
 
-
-
-
-
-
-
                     </div>
                     {/*user info form*/}
-                    <UserInfo />
+                    <UserInfo onClick={this.handleRequestDB} />
 
 
                   </div>
+
+                  {/*show db records here*/}
+                  <DbPanel record={this.state.db} onClick={this.handleRequestDB} />
                 </div>
 
             </div>
